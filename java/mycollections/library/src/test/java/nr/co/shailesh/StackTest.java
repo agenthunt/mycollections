@@ -1,8 +1,5 @@
 package nr.co.shailesh;
 
-import junit.framework.TestCase;
-
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -11,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class StackTest {
     @org.junit.Test
     public void pop() throws Exception {
-        Stack<Integer> s = new Stack<>();
+        Stack<Integer> s = new ArrayStack<>();
         s.push(10);
         s.push(20);
         int top = s.pop();
@@ -20,12 +17,23 @@ public class StackTest {
 
     @org.junit.Test
     public void push() throws Exception {
-        Stack<Integer> s = new Stack<>();
+        ArrayStack<Integer> s = new ArrayStack<>();
         s.push(10);
         s.push(20);
         int top = s.pop();
         assertEquals(20, top);
         assertEquals(1, s.size());
+    }
+
+    @org.junit.Test
+    public void testResize(){
+        Stack<Integer> s = new ArrayStack<>();
+        for (int i = 0; i < 400; i++) {
+            s.push(i);
+        }
+        int top = s.top();
+        assertEquals(399, top);
+        assertEquals(400, s.size());
     }
 
 }
